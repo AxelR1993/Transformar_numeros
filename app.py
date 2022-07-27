@@ -24,13 +24,14 @@ def uploader():
         # Guardamos el archivo en el directorio "Archivos PDF"
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         # Retornamos una respuesta satisfactoria
-        return render_template('cargando.html')
+        return render_template('columna.html')
 
-@app.route("/transformar")
+@app.route("/transformar", methods=['GET', "POST"])
+
 def transformar():
-    #telefonos = input("Inserte nombre de columna con los numeros de celular a convertir: ")
-    print("Cargando...")
-    df = pd.read_excel("./Archivos Excel/Excel_para_pruebas.xlsx")
+
+    columna = request.form.get('columna')
+    df = pd.read_excel("./Archivos Excel/"filename)
     df.applymap(str)
 
     def validar_telefono(telefono_celular):
@@ -68,13 +69,14 @@ def transformar():
         else:
             return numero
 
-    df["Numero sin 54 ni 9"] = df["celular"].apply(validar_telefono)
+    
+    df["Numero sin 54 ni 9"] = df[columna].apply(validar_telefono)
     df["Numero con 54"] = '54' +  df["Numero sin 54 ni 9"]
     df["Numero con 54 9"] = '549' +  df["Numero sin 54 ni 9"]
     df["Numero con 54"] = df["Numero con 54"].apply(eliminar_vacios)
     df["Numero con 54 9"] = df["Numero con 54 9"].apply(eliminar_vacios)
     df.to_excel('Excel_para_pruebas_TRANSFORMADO.xlsx')
-    return render_template('formulario.html')
+    return render_template('exito.html')
     
 
 if __name__ == '__main__':

@@ -35,8 +35,15 @@
         padding-top: 20px;
         background-color: #f1f1f1;
         height: 100%;
-  
-  
+      }
+
+      .subir_archivo {
+
+        font-size: 150%;
+        margin: 0 auto;
+        margin-top: 3%;
+        color:blue;
+
       }
   
       /* Set black background color, white text and some padding */
@@ -50,10 +57,19 @@
   
       .p1 {
         font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
       }
   
       .titulo {
         font-family: sans-serif, Helvetica, sans-serif;
+        
+      }
+
+      .enviar {
+        font-size:x-large;
+        margin-top: 5%;
+        color: black;
+        background-color:cornflowerblue
       }
   
   
@@ -112,8 +128,9 @@
             <br>
 
             <form action="/uploader" method="POST" enctype="multipart/form-data">
-              <input type="file" name="archivo">
-              <input type="submit">
+              <input type="file" name="archivo" class="subir_archivo">
+              
+              <input type="submit" class="enviar">
              </form>
 
            

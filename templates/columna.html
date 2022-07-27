@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <title>Normalizar números de teléfono</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
+
+  <style>
+  
+      /* Remove the navbar's default margin-bottom and rounded borders */
+      .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+        background-image: url("/static/fondo.png");
+  
+      }
+  
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {
+        height: 450px
+      }
+  
+      /* Set gray background color and 100% height */
+      .sidenav {
+        padding-top: 20px;
+        background-color: #f1f1f1;
+        height: 100%;
+      }
+
+      .subir_archivo {
+
+        font-size: 150%;
+        margin: 0 auto;
+        margin-top: 3%;
+        color:blue;
+
+      }
+  
+      /* Set black background color, white text and some padding */
+      footer {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+        background: url("/static/fondo.png");
+  
+      }
+  
+      .p1 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+      }
+  
+      .titulo {
+        font-family: sans-serif, Helvetica, sans-serif;
+        
+      }
+
+      .enviar {
+        font-size:x-large;
+        margin-top: 5%;
+        color: black;
+        background-color:cornflowerblue
+      }
+  
+  
+      /* On small screens, set height to 'auto' for sidenav and grid */
+      @media screen and (max-width: 767px) {
+        .sidenav {
+          height: auto;
+          padding: 15px;
+        }
+  
+        .row.content {
+          height: auto;
+        }
+      }
+    </style>
+
+
+
+</head>
+
+
+
+<body>
+
+    
+    
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <img src="static/mimuni.png" alt="mimuni" width="25%" class="img-responsive center-block">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+    
+        </div>
+        </div>
+      </nav>
+    
+      <div class="container-fluid text-center">
+        <div class="row content">
+          <div class="col-sm-2 sidenav">
+    
+          </div>
+          <div class="col-sm-8 text-center">
+            <br>
+            <h2 class="titulo">Ingrese el nombre de la columna con los numeros a convertir:</h2>
+            <br><br><br>
+            <form action="/transformar" method="post">
+            <label for="columna"></label>
+            <input type="text" name="columna"><br/>
+            <input class='enviar' type="submit" value="Enviar" />
+            </form>
+
+            <br>
+
+            
+
+           
+          </div>
+          <div class="col-sm-2 sidenav">
+          </div>
+        </div>
+      </div>
+      </div>
+    
+      <footer class="container-fluid text-center">
+        <img src="static/escudo.png" alt="escudo" width="8%">
+        <img src="static/futuro.png" alt="futuro" width="12%" style="margin-left: 25%;">
+    
+      </footer>
+    
+    </body>
+
+</html>
+
