@@ -86,7 +86,6 @@ def transformar():
     df["Numero con 54"] = df["Numero con 54"].apply(eliminar_vacios)
     df["Numero con 54 9"] = df["Numero con 54 9"].apply(eliminar_vacios)
     df.to_excel(f"{nombre_archivo}'_TRANSFORMADO'.xlsx")
-    
     return render_template('exito.html')
     
 
