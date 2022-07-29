@@ -27,12 +27,17 @@ def uploader():
         filename = secure_filename(f.filename)
         global nombre_archivo
         nombre_archivo = filename
+        if filename == '' :
+            return render_template('archivo.html')
         global columna
         columna = request.form.get('columna')
+        if columna == '' :
+            return render_template('nombre.html')
         # Guardamos el archivo en el directorio "Archivos PDF"
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         # Retornamos una respuesta satisfactoria
         return render_template('cargando.html')
+    
 
     
 

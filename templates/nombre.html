@@ -39,9 +39,9 @@
 
       .subir_archivo {
 
-        font-size: 100%;
+        font-size: 150%;
         margin: 0 auto;
-        margin-top: 2%;
+        margin-top: 3%;
         color:blue;
 
       }
@@ -57,12 +57,11 @@
   
       .p1 {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 15px;
+        font-size: 20px;
       }
   
       .titulo {
         font-family: sans-serif, Helvetica, sans-serif;
-        font-size:25px;
         
       }
 
@@ -72,6 +71,8 @@
         color: black;
         background-color:cornflowerblue
       }
+
+    
   
   
       /* On small screens, set height to 'auto' for sidenav and grid */
@@ -117,32 +118,19 @@
           <div class="col-sm-2 sidenav">
     
           </div>
-          <div class="cuerpo">
           <div class="col-sm-8 text-center">
             <br>
-            <h1 class="titulo">Normalizar números de telefono</h1>
-            <br>
-            <p class="p1">Cargue un archivo Excel con un listado de números de teléfono, indique el nombre de
-              la columna, y obtenga un nuevo Excel con tres columnas nuevas agregadas, los teléfonos limpios
-              los teléfonos con 54 al comienzo y los teléfonos con 54 9 
-            </p>
+            <h1 class="titulo">Columna no encontrada, intente nuevamente</h1>
+            <br><br><br>
+            <a href="/">
+              <button type="button" class="btn btn-primary btn-lg" style = "margin-top: 10%">Procesar otro archivo</button>
+            </a></button>
 
             <br>
 
-            <form action="/uploader" method="POST" enctype="multipart/form-data">
-              <input type="file" name="archivo" class="subir_archivo">
-              
-              <br>
-
-             <h3>Ingrese el nombre de la columna con los numeros a convertir:</h3>
-            <br><br>
             
-            <label for="columna"></label>
-            <input type="text" name="columna"><br/>
-            <a href="cargando.html">
-            <input class='enviar' type="submit" value="Enviar"/></a>
-             </form>
-          </div>
+
+           
           </div>
           <div class="col-sm-2 sidenav">
           </div>
@@ -155,23 +143,8 @@
         <img src="static/futuro.png" alt="futuro" width="12%" style="margin-left: 25%;">
     
       </footer>
-
-      <script>
-
-    function myFunction() {
-    var x = document.getElementById("cuerpo");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-
-      </script>
     
     </body>
 
-    
-    
 </html>
 
