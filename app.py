@@ -6,9 +6,11 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 import time
 from os import getcwd
+from os import remove
 
 nombre_archivo = None
 columna = None
+filas = 0
 routes_files = Blueprint("routes_files", __name__)
 PATH_FILE = getcwd()
 
@@ -49,10 +51,12 @@ def uploader():
 @app.route("/transformar", methods=['GET', "POST"])
 
 def transformar():
-
-    time.sleep(2)
+    
+    time.sleep(1)
     df = pd.read_excel(nombre_archivo)
     df.applymap(str)
+    global filas
+    filas = len(df.index)
 
     def validar_telefono(telefono_celular):
 
@@ -89,17 +93,20 @@ def transformar():
         else:
             return numero
 
+    try: 
+        df["Numero sin 54 ni 9"] = df[columna].apply(validar_telefono)
+        df["Numero con 54"] = '54' +  df["Numero sin 54 ni 9"]
+        df["Numero con 54 9"] = '549' +  df["Numero sin 54 ni 9"]
+        df["Numero con 54"] = df["Numero con 54"].apply(eliminar_vacios)
+        df["Numero con 54 9"] = df["Numero con 54 9"].apply(eliminar_vacios)
     
-    df["Numero sin 54 ni 9"] = df[columna].apply(validar_telefono)
-    df["Numero con 54"] = '54' +  df["Numero sin 54 ni 9"]
-    df["Numero con 54 9"] = '549' +  df["Numero sin 54 ni 9"]
-    df["Numero con 54"] = df["Numero con 54"].apply(eliminar_vacios)
-    df["Numero con 54 9"] = df["Numero con 54 9"].apply(eliminar_vacios)
-   
-    df.to_excel(nombre_archivo)
+        df.to_excel(nombre_archivo)
+        return (render_template('exito.html'), filas)
     
+    except:
+        return render_template('nombre.html')
    
-    return (render_template('exito.html'))
+    
 
 @app.route("/descargar", methods=['GET', "POST"])
 
@@ -107,6 +114,10 @@ def descargar():
     
     return send_from_directory(PATH_FILE, path=nombre_archivo, as_attachment=True)
     
+@app.route("/eliminar", methods=['GET', "POST"])
+def eliminar():
+    remove(nombre_archivo)
+    return(render_template('eliminado.html'))
 
 if __name__ == '__main__':
     # Iniciamos la aplicacion 
