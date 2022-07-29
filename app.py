@@ -28,17 +28,19 @@ def uploader():
         # Obtenemos el archivo del input "archivo"
         f = request.files['archivo']
         filename = secure_filename(f.filename)
-        global nombre_archivo
-        nombre_archivo = filename
+
         if filename == '' :
             return render_template('archivo.html')
+
+        global nombre_archivo
+        nombre_archivo = filename + "_transformado.xlsx"
         global columna
         columna = request.form.get('columna')
+
         if columna == '' :
             return render_template('nombre.html')
-        # Guardamos el archivo en el directorio "Archivos PDF"
-        f.save(filename)
-        # Retornamos una respuesta satisfactoria
+
+        f.save(nombre_archivo)
         return (render_template('cargando.html'), nombre_archivo)
     
 
@@ -93,7 +95,7 @@ def transformar():
     df["Numero con 54 9"] = '549' +  df["Numero sin 54 ni 9"]
     df["Numero con 54"] = df["Numero con 54"].apply(eliminar_vacios)
     df["Numero con 54 9"] = df["Numero con 54 9"].apply(eliminar_vacios)
-    
+   
     df.to_excel(nombre_archivo)
     
    
