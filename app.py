@@ -1,19 +1,22 @@
 import os
 import pandas as pd
 import re
-from flask import Flask, render_template, request
+from flask import Blueprint, Flask, render_template, request, send_from_directory
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
 import time
+from os import getcwd
 
 nombre_archivo = None
 columna = None
+routes_files = Blueprint("routes_files", __name__)
+PATH_FILE = getcwd()
 
 app = Flask(__name__)
 
 # Carpeta de subida
 
-app.config['UPLOAD_FOLDER'] = './Archivos Excel'
+app.config['UPLOAD_FOLDER'] = '/'
 
 @app.route('/')
 def upload_file():
@@ -34,9 +37,9 @@ def uploader():
         if columna == '' :
             return render_template('nombre.html')
         # Guardamos el archivo en el directorio "Archivos PDF"
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        f.save(filename)
         # Retornamos una respuesta satisfactoria
-        return render_template('cargando.html')
+        return (render_template('cargando.html'), nombre_archivo)
     
 
     
@@ -46,7 +49,7 @@ def uploader():
 def transformar():
 
     time.sleep(2)
-    df = pd.read_excel(f"./Archivos Excel/{nombre_archivo}")
+    df = pd.read_excel(nombre_archivo)
     df.applymap(str)
 
     def validar_telefono(telefono_celular):
@@ -90,8 +93,17 @@ def transformar():
     df["Numero con 54 9"] = '549' +  df["Numero sin 54 ni 9"]
     df["Numero con 54"] = df["Numero con 54"].apply(eliminar_vacios)
     df["Numero con 54 9"] = df["Numero con 54 9"].apply(eliminar_vacios)
-    df.to_excel(f"{nombre_archivo}'_TRANSFORMADO'.xlsx")
-    return render_template('exito.html')
+    
+    df.to_excel(nombre_archivo)
+    
+   
+    return (render_template('exito.html'))
+
+@app.route("/descargar", methods=['GET', "POST"])
+
+def descargar():
+    
+    return send_from_directory(PATH_FILE, path=nombre_archivo, as_attachment=True)
     
 
 if __name__ == '__main__':
